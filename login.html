@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="renderer" content="webkit" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta name="description" content="Plane UI" />
+		<meta name="keywords" content="Plane UI" />
+		<title>登录</title>
+
+		<link rel="icon" type="image/png" href="common/logo/favicon.png" />
+		<link rel="stylesheet" type="text/css" href="common/css/planeui.css" />
+		<link rel="stylesheet" type="text/css" href="common/css/login.css" />
+	</head>
+
+	<body>
+		<a name="top"></a>
+		<div class="pui-layout pui-flexbox pui-flex-column login-layout" id="content">
+			<div class="pui-layout pui-flex login-main">
+				<div class="pui-layout pui-layout-fixed pui-layout-fixed-1200 login-main-con">
+					<div class="login-panel">
+						<form class="pui-form login-form">
+							<div class="pui-form-group">
+								<h1 class="pui-text-white pui-text-normal">
+                                    <i class="planeui-logo-2x pui-text-xxxxxl"></i> 登录 Login
+                                </h1>
+								<div role="username">
+									<input type="text" name="username" maxlength="16" class="pui-unbordered" placeholder="用户名" />
+									<i class="fa fa-user pui-text-blue"></i>
+								</div>
+							</div>
+							<div class="pui-form-group">
+								<div role="password">
+									<input type="password" name="password" maxlength="16" class="pui-unbordered" placeholder="密码" />
+									<i class="fa fa-lock pui-text-blue"></i>
+								</div>
+							</div>
+							<div class="pui-form-group">
+								<div role="vcode">
+									<input type="text" name="vcode" maxlength="4" class="pui-unbordered" placeholder="验证码(暂未开发)" />
+									<i class="fa fa-shield pui-text-blue"></i>
+									<img src="common/images/captcha.png" id="vcode-img" />
+								</div>
+							</div>
+							<div class="pui-form-group">
+								<input type="button" id="submit" class="pui-btn pui-btn-default pui-bg-blue-800 pui-unbordered" value="登录" />
+								<span><a href="#" class="pui-text-white pui-text-xs">忘记密码？</a></span>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript" src="common/js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="common/js/planeui.js"></script>
+	<script type="text/javascript" src="common/js/com-style.js"></script>
+	<script type="text/javascript" src="common/js/vue.js"></script>
+	<script src="https://cdn.wilddog.com/sdk/js/2.3.8/wilddog.js"></script>
+	<script type="text/javascript" src="common/js/wilddogio_lhc.js"></script>
+	<script type="text/javascript">
+		$("#submit").on("click", function() {
+			var username = $('input[name="username"]').val();
+			var password = $('input[name="password"]').val();
+
+			var lgoin = function(data) {
+				if(!data) {
+					console.log("该用户不存在")
+				} else {
+					if(data[username]) {
+						var _data=data[username];
+						if(_data.psw==password){
+							console.log("密码正确")
+							window.location="index.html";
+						}else{
+							console.log("密码错误")
+						}
+					}
+				}
+			}
+			equalTo("user_info", username, lgoin);
+		})
+	</script>
+
+</html>
